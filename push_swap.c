@@ -13,22 +13,22 @@
 #include "push_swap.h"
 
 
-/*void	ft_push_swap3ints(t_list *a, t_list *b)
+void	ft_push_swap3ints(t_list *a, t_list *b)
 {
 	int	*content;
 
 	1 2 3
 	o content de nodo 1 > content de nodo 2
 
-*/
+}
 
 int	main(int argc, char *argv[])
 {
 	t_list	*a;
 	t_list	*b;
 	t_list	*new_node;
-	int	i;
-	int	list_size;
+	int		i;
+	int		list_size;
 	
 	b = ft_lstnew(NULL);
 	a = NULL;

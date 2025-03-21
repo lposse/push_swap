@@ -1,0 +1,27 @@
+
+#include "push_swap.h"
+
+void	ft_pushswap_ra(t_list **a)
+{
+ DESPLAZA HACIA ARRIBA TODOS LOS ELEMENTOS DEL STACK A DE FORMA QUE EL PRIMERO SE CONVIERTE EN EL ULTIMO
+	t_list	*temp;
+	t_list	*last;
+
+	temp = *a;
+	while (temp->next != NULL)
+		temp = temp->next;
+	if(temp->next == NULL)
+	{
+		last = temp;
+		last->next = *a;
+		}
+	}
+	*a = (*a)->next;
+}
+
+void	ft_pushswap_rb(t_list **b)
+{
+
+}
+
+void	ft_pushswap_rr(t_list **a, t_list **b)

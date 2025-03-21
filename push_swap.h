@@ -15,4 +15,10 @@
 
 # include "Libft/libft.h"
 
+void	ft_pushswap_sa(t_list **a);
+void	ft_pushswap_sb(t_list **b);
+void	ft_pushswap_ss(t_list **a, t_list **b);
+void	ft_pushswap_pa(t_list **a, t_list **b);
+void	ft_pushswap_pb(t_list **a, t_list **b); 
+
 #endif

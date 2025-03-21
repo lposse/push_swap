@@ -12,13 +12,6 @@
 
 #include "libft.h"
 
-void	del(void *content)
-{
-	if (content)
-		free(content);
-	return;
-}
-
 void	*error(t_list	*new_node, t_list *result, void (*del)(void *))
 {
 	t_list	*temp;
