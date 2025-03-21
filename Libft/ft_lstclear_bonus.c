@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:52:14 by lposse            #+#    #+#             */
-/*   Updated: 2025/01/13 21:15:08 by lposse           ###   ########.fr       */
+/*   Updated: 2025/03/21 18:49:48 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	del(void *content)
 {
 	if (content)
 		free(content);
-}  
+}
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {

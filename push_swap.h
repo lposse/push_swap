@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 21:54:13 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/20 21:59:13 by lposse           ###   ########.fr       */
+/*   Updated: 2025/03/21 19:14:47 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	ft_pushswap_sa(t_list **a);
 void	ft_pushswap_sb(t_list **b);
 void	ft_pushswap_ss(t_list **a, t_list **b);
 void	ft_pushswap_pa(t_list **a, t_list **b);
-void	ft_pushswap_pb(t_list **a, t_list **b); 
+void	ft_pushswap_pb(t_list **a, t_list **b);
+void	ft_pushswap_ra(t_list **a);
+void	ft_pushswap_rb(t_list **b);
+void	ft_pushswap_rr(t_list **a, t_list **b);
+void	ft_pushswap_rra(t_list **a);
+void	ft_pushswap_rrb(t_list **b);
+void	ft_pushswap_rrr(t_list **a, t_list **b);
 
 #endif
