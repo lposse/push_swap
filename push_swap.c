@@ -14,24 +14,37 @@
 
 void	ft_pushswap_algorithm2(t_list *a)
 {
-	t_list	segundo;
+	t_list	*second;
 
-	segundo = a->next;
-	if ((a->content) > (segundo->content))
+	second = a->next;
+	if (*(int *)(a->content) > *(int *)(second->content))
 		return (ft_pushswap_sa(a));
 }
 
-void	ft_pushswap_algorithm3(t_list *a, t_list *b)
+void	ft_pushswap_algorithm3(t_list *a)
 {
-	int	*content;
-
-	1 2 3
-	o content de nodo 1 > content de nodo 2
-}
-
-void	ft_pushswap_algorithm4(t_list *a, t_list *b)
-{
-
+	if (*(int *)(a->content) < *(int *)(a->next->content) < *(int *)(a->next->next->content))
+		return ;
+	if (*(int *)(a->content) > *(int *)(a->next->content) < *(int *)(a->next->next->content))
+	{
+		if (*(int *)(a->content) < *(int *)(a->next->next->content))
+			return(ft_pushswap_sa(a));
+		if (*(int *)(a->content) > *(int *)(a->next->next->content))
+			return (ft_pushswap_ra(a));
+	}
+	if (*(int *)(a->content) > *(int *)(a->next->content) > *(int *)(a->next->next->content))
+	{
+		ft_pushswap_ra(a);
+		return (ft_pushswap_sa(a));
+	}
+	if (*(int *)(a->content) < *(int *)(a->next->content) > *(int *)(a->next->next->content))
+	{
+		ft_pushswap_rra(a);
+		if (*(int *)(a->content) < *(int *)(a->next->content) < *(int *)(a->next->next->content))
+			return ;
+		else
+			return (ft_pushswap_sa(a));
+	}
 }
 
 void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
@@ -39,17 +52,32 @@ void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 	if (list_size == 2)
 		return (ft_pushswap_algorithm2(a));
 	if (list_size == 3)
-		return (ft_pushswap_algorithm3(a, b));
+		return (ft_pushswap_algorithm3(a));
 	if (list_size == 4)
 		return (ft_pushswap_algorithm4(a, b));
 }
 
-int	ft_pushswap_error()
+int	ft_pushswap_error(char *argv[])
 {
-	while (argv[i])
+	int	i;
+	int	num1;
+	int	num2;
+
+	i = 0;
+	while (argv[i + 1])
 	{
-		if (argv[i] == argv[i + 1])
-			ERROR;
+		if (ft_strchr(argv[i], '-') != NULL )
+		{
+			write (2, "ERROR\n", 6);
+			return (1);
+		}
+		num1 = ft_atoi(argv[i]);
+		num2 = ft_atoi(argv[i + 1]);
+		if (num1 == num2)
+		{
+			write (2, "ERROR\n", 6);
+			return (1);
+		}
 		i++;
 	}
 	return (0);
