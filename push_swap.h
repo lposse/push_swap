@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 21:54:13 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/21 19:14:47 by lposse           ###   ########.fr       */
+/*   Updated: 2025/03/24 20:55:51 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "Libft/libft.h"
+# include <limits.h>
 
 void	ft_pushswap_sa(t_list **a);
 void	ft_pushswap_sb(t_list **b);
