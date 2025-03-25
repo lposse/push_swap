@@ -6,36 +6,16 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:01:31 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/24 22:24:14 by lposse           ###   ########.fr       */
+/*   Updated: 2025/03/25 20:23:59 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pushswap_algorithm3(t_list *a)
+void	ft_pushswap_algorithm2(t_list *a)
 {
-	if (*(int *)(a->content) < *(int *)(a->next->content) < *(int *)(a->next->next->content))
-		return ;
-	if (*(int *)(a->content) > *(int *)(a->next->content) < *(int *)(a->next->next->content))
-	{
-		if (*(int *)(a->content) < *(int *)(a->next->next->content))
-			return (ft_pushswap_sa(a));
-		if (*(int *)(a->content) > *(int *)(a->next->next->content))
-			return (ft_pushswap_ra(a));
-	}
-	if (*(int *)(a->content) > *(int *)(a->next->content) > *(int *)(a->next->next->content))
-	{
-		ft_pushswap_ra(a);
-		return (ft_pushswap_sa(a));
-	}
-	if (*(int *)(a->content) < *(int *)(a->next->content) > *(int *)(a->next->next->content))
-	{
-		ft_pushswap_rra(a);
-		if (*(int *)(a->content) < *(int *)(a->next->content) < *(int *)(a->next->next->content))
-			return ;
-		else
-			return (ft_pushswap_sa(a));
-	}
+	if (*(int *)(a->content) > *(int *)(a->next->content))
+		ft_pushswap_sa(a);
 }
 
 void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
