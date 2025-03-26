@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:53:45 by lposse            #+#    #+#             */
-/*   Updated: 2025/01/13 21:18:45 by lposse           ###   ########.fr       */
+/*   Updated: 2025/03/26 19:08:32 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		ft_toupper(int c);
 typedef struct s_list
 {
 	void			*content;
+	int				index;
 	struct s_list	*next;
 }	t_list;
 

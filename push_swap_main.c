@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:01:31 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/25 20:23:59 by lposse           ###   ########.fr       */
+/*   Updated: 2025/03/26 21:42:29 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_pushswap_error(char *argv[])
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (argv[i])
 	{
@@ -77,10 +77,10 @@ int	ft_pushswap_error(char *argv[])
 int	main(int argc, char *argv[])
 {
 	int		i;
-	int	list_size;
-	t_list		*a;
-	t_list		*b;
-	t_list		*new_node;
+	int		list_size;
+	t_list	*a;
+	t_list	*b;
+	t_list	*new_node;
 
 	if (ft_pushswap_error(argv + 1) == 1)
 		return (1);
