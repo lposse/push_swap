@@ -32,10 +32,10 @@ int	ft_pushswap_check_is_sorted(t_list *a)
 {
 	int	i;
 
-	i = (int *)(a->content);
+	i = *(int *)(a->content);
 	while (a)
 	{
-		if (i > (int *)(a->content))
+		if (i > *(int *)(a->content))
 			return (0);
 		i = (int *)(a->content);
 		a = a->next;

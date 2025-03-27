@@ -26,6 +26,8 @@ void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 		return (ft_pushswap_algorithm3(a));
 	if (list_size == 4)
 		return (ft_pushswap_algorithm4(a, b));
+	if (list_size >= 5)
+		return (ft_pushswap_algorithmturk(a, b));
 }
 
 int	ft_is_positive_int(char *str)
@@ -97,5 +99,7 @@ int	main(int argc, char *argv[])
 	}
 	list_size = ft_lstsize(a);
 	ft_pushswap_prealgorithm(list_size, &a, &b);
-	return (0);
+	if (ft_pushswap_check_is_sorted(a) == 1)
+		return (0);
+	return (1);
 }
