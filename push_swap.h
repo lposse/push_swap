@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 21:54:13 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/26 21:33:39 by lposse           ###   ########.fr       */
+/*   Updated: 2025/04/01 21:52:32 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_pushswap_algorithm4_x3o4xx(t_list *a, t_list *b, int c2, int c3, int c4)
 void	ft_pushswap_algorithm4_4o3o2xxx(t_list *a, t_list *b, int c2, int c3, int c4);
 void	ft_pushswap_algorithm4_x1(t_list *a, t_list *b, int c1, int c3, int c4);
 void	ft_pushswap_algorithm4_pb3pa(t_list *a, t_list *b);
-void	ft_pushswap_algorithmturk(t_list *a, t_list *b);
+void	ft_pushswap_algorithmturk(t_list **a, t_list **b);
 int		ft_lst_intmax_index(t_list *a);
 int		ft_lst_intmax(t_list *a);
 int		ft_lst_intmin_index(t_list *a);

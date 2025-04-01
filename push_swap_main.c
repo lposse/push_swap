@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:01:31 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/26 21:42:29 by lposse           ###   ########.fr       */
+/*   Updated: 2025/04/01 21:56:08 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	ft_pushswap_algorithm2(t_list *a)
 void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 {
 	if (list_size == 2)
-		return (ft_pushswap_algorithm2(a));
+		return (ft_pushswap_algorithm2(*a));
 	if (list_size == 3)
-		return (ft_pushswap_algorithm3(a));
+		return (ft_pushswap_algorithm3(*a));
 	if (list_size == 4)
-		return (ft_pushswap_algorithm4(a, b));
+		return (ft_pushswap_algorithm4(*a, *b));
 	if (list_size >= 5)
 		return (ft_pushswap_algorithmturk(a, b));
 }

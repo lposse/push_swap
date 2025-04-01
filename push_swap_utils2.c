@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 21:30:19 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/26 21:40:48 by lposse           ###   ########.fr       */
+/*   Updated: 2025/04/01 21:56:55 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_pushswap_check_is_sorted(t_list *a)
 	{
 		if (i > *(int *)(a->content))
 			return (0);
-		i = (int *)(a->content);
+		i = *(int *)(a->content);
 		a = a->next;
 	}
 	return (1);
