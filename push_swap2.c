@@ -73,21 +73,21 @@ void	ft_pushswap_algorithmturk(t_list **a, t_list **b)
 		ft_pushswap_sb(b);
 	while (ft_lstsize(*a) > 3)
 	{
-		max_pos_b = find_max_position(*b);
-		min_pos_b = find_min_position(*b);
+		max_pos_b = ft_lst_intmax(*b);
+		min_pos_b = ft_lst_intmin(*b);
 		find_cheapest_element(*a, *b, &cheapest_pos);
 		execute_optimal_moves(a, b, cheapest_pos, max_pos_b, min_pos_b);
 	}
 	ft_pushswap_algorithm3(*a);
 	while (ft_lstsize(*b) > 0)
 	{
-		best_pos = find_max_position(*b);
+		best_pos = ft_lst_intmax_index(*b);
 		size_b = ft_lstsize(*b);
 		if (best_pos <= size_b / 2)
 		{
 			while (best_pos > 0)
 			{
-				ft_pushswap_rb(*b);
+				ft_pushswap_rb(b);
 				best_pos--;
 			}
 		}
@@ -95,7 +95,7 @@ void	ft_pushswap_algorithmturk(t_list **a, t_list **b)
 		{
 			while (best_pos < size_b)
 			{
-				ft_pushswap_rrb(*b);
+				ft_pushswap_rrb(b);
 				best_pos++;
 				if (best_pos == size_b)
 					best_pos = 0;

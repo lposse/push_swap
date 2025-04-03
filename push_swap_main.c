@@ -15,7 +15,7 @@
 void	ft_pushswap_algorithm2(t_list *a)
 {
 	if (*(int *)(a->content) > *(int *)(a->next->content))
-		ft_pushswap_sa(a);
+		ft_pushswap_sa(&a);
 }
 
 void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
@@ -79,7 +79,6 @@ int	ft_pushswap_error(char *argv[])
 int	main(int argc, char *argv[])
 {
 	int		i;
-	int		list_size;
 	t_list	*a;
 	t_list	*b;
 	t_list	*new_node;
@@ -97,8 +96,8 @@ int	main(int argc, char *argv[])
 		ft_lstadd_back(&a, new_node);
 		i++;
 	}
-	list_size = ft_lstsize(a);
-	ft_pushswap_prealgorithm(list_size, &a, &b);
+	i = ft_lstsize(a);
+	ft_pushswap_prealgorithm(i, &a, &b);
 	if (ft_pushswap_check_is_sorted(a) == 1)
 		return (0);
 	return (1);

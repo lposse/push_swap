@@ -20,20 +20,20 @@ int	calc_moves_to_top_a(t_list *a, int element_index)
 	if (element_index <= stack_size / 2)
 		return (element_index);
 	else
-		return (stack_size - element_index);
+		return (element_index - stack_size);
 }
 
 int	calc_moves_to_position_b(t_list *b, int target_pos)
 {
-	int	stack_size;
+	int	size_b;
 
-	if (!stack_b)
+	if (!b)
 		return (0);
-	stack_size = ft_lstsize(b);
-	if (target_pos <= stack_size / 2)
+	size_b = ft_lstsize(b);
+	if (target_pos <= size_b / 2)
 		return (target_pos);
 	else
-		return (stack_size - target_pos);
+		return (target_pos - size_b);
 }
 
 int	find_target_position_in_b(t_list *b, int node_content, int max_index, int min_index)
@@ -41,7 +41,7 @@ int	find_target_position_in_b(t_list *b, int node_content, int max_index, int mi
 	t_list	*temp;
 	int		target_pos;
 
-	if (!stack_b)
+	if (!b)
 		return (0);
 	if (node_content > *(int *)ft_lst_findcontent_byindex(b, max_index))
 		return (max_index);
@@ -51,7 +51,7 @@ int	find_target_position_in_b(t_list *b, int node_content, int max_index, int mi
 	target_pos = 0;
 	while (temp)
 	{
-		if (temp->next && node_content < temp->content && node_content > temp->next->content)
+		if (temp->next && node_content < *(int *)(temp->content) && node_content > *(int *)(temp->next->content))
 		{
 			target_pos++;
 			break;
@@ -66,14 +66,32 @@ int	ft_pushswap_calculate_totalmoves(t_list *a, t_list *b, int index_a, int max_
 {
 	int	moves_totop_a;
 	int	moves_b;
-	int	value;
+	int	node_content;
 	int	target_pos_b;
+	int	counter_rr_rrr;
 
-	value = ft_lst_findcontent_byindex(a, index_a);
+	node_content = *(int *)ft_lst_findcontent_byindex(a, index_a);
 	moves_totop_a = calc_moves_to_top_a(a, index_a);
-	target_pos_b = find_target_position_in_b(b, value, max_pos_b, min_pos_b);
+	target_pos_b = find_target_position_in_b(b, node_content, max_pos_b, min_pos_b);
 	moves_b = calc_moves_to_position_b(b, target_pos_b);
-	return (moves_totop_a + moves_b + 1);
+	counter_rr_rrr = 0;
+	while (moves_totop_a > 0 && moves_b > 0)
+	{
+		counter_rr_rrr++;
+		moves_totop_a--;
+		moves_b--;
+	}
+	while (moves_totop_a < 0 && moves_b < 0)
+	{
+		counter_rr_rrr++;
+		moves_totop_a++;
+		moves_b++;
+	}
+	if (moves_totop_a < 0)
+		moves_totop_a = -(moves_totop_a);
+	if (moves_b < 0)
+		moves_b = -(moves_b);
+	return (moves_totop_a + moves_b + counter_rr_rrr + 1);
 }
 
 void	execute_optimal_moves(t_list **a, t_list **b, int index_node_a, int max_index_b, int min_index_b)
@@ -85,18 +103,18 @@ void	execute_optimal_moves(t_list **a, t_list **b, int index_node_a, int max_ind
 
 	a_size = ft_lstsize(*a);
 	b_size = ft_lstsize(*b);
-	node_content = ft_lst_findcontent_byindex(*a, index_node_a);
+	node_content = *(int *)ft_lst_findcontent_byindex(*a, index_node_a);
 	target_pos_b = find_target_position_in_b(*b, node_content, max_index_b, min_index_b);
 	while (index_node_a > 0)
 	{
 		if (index_node_a <= a_size / 2)
 		{
-			ft_pushswap_ra(*a);
+			ft_pushswap_ra(a);
 			index_node_a--;
 		}
 		else
 		{
-			ft_pushswap_rra(*a);
+			ft_pushswap_rra(a);
 			index_node_a = (index_node_a + 1) % a_size;
 		}
 	}
@@ -104,14 +122,14 @@ void	execute_optimal_moves(t_list **a, t_list **b, int index_node_a, int max_ind
 	{
 		if (target_pos_b <= b_size / 2)
 		{
-			ft_pushswap_rb(*b);
+			ft_pushswap_rb(b);
 			target_pos_b--;
 		}
 		else
 		{
-			ft_pushswapp_rrb(*b);
+			ft_pushswap_rrb(b);
 			target_pos_b = (target_pos_b + 1) % b_size;
 		}
 	}
-	ft_pushswap_pb(*a, *b);
+	ft_pushswap_pb(a, b);
 }

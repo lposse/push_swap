@@ -46,5 +46,7 @@ int		ft_lst_findindex_ofint(t_list *a, int c);
 void	ft_pushswap_freestack(t_list **a);
 int		ft_pushswap_check_is_sorted(t_list *a);
 void	*ft_lst_findcontent_byindex(t_list *a, int index);
+int		ft_pushswap_findplace_pa(t_list *a, int num_to_push);
+int		ft_pushswap_findplace_pb(t_list *b, int num_to_push);
 
 #endif
