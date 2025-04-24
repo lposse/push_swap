@@ -15,22 +15,8 @@
 void    ft_pushswap_algorithm4_pb3pa(t_list *a, t_list *b)
 {
 	ft_pushswap_pb(&a, &b);
-	ft_pushswap_algorithm3(a);
+	ft_pushswap_algorithm3(&a);
 	ft_pushswap_pa(&a, &b);
-}
-
-int	ft_pushswap_calculate_totalmoves(t_list *a, t_list *b, int index_a, int max_pos_b, int min_pos_b)
-{
-	int	moves_totop_a;
-	int	moves_b;
-	int	node_content;
-	int	target_pos_b;
-
-	node_content = *(int *)ft_lst_findcontent_byindex(a, index_a);
-	moves_totop_a = calc_moves_to_top_a(a, index_a);
-	target_pos_b = find_target_position_in_b(b, node_content, max_pos_b, min_pos_b);
-	moves_b = calc_moves_to_position_b(b, target_pos_b);
-	return (moves_totop_a + moves_b + 1);
 }
 
 int	find_cheapest_element(t_list *a, t_list *b, int *cheapest_pos)
@@ -78,7 +64,7 @@ void	ft_pushswap_algorithmturk(t_list **a, t_list **b)
 		find_cheapest_element(*a, *b, &cheapest_pos);
 		execute_optimal_moves(a, b, cheapest_pos, max_pos_b, min_pos_b);
 	}
-	ft_pushswap_algorithm3(*a);
+	ft_pushswap_algorithm3(a);
 	while (ft_lstsize(*b) > 0)
 	{
 		best_pos = ft_lst_intmax_index(*b);

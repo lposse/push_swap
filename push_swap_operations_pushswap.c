@@ -71,10 +71,13 @@ void	ft_pushswap_pa(t_list **a, t_list **b)
 
 void	ft_pushswap_pb(t_list **a, t_list **b)
 {
-	if (a && *a)
-	{
-		ft_lstadd_front(b, *a);
-		ft_lstdel_first(a, del);
-		write(1, "pb\n", 3);
-	}
+	t_list *temp;
+
+	if (!a || !*a)
+		return;
+	temp = *a;
+	*a = (*a)->next;
+	temp->next = NULL;
+	ft_lstadd_front(b, temp);
+	write(1, "pb\n", 3);
 }

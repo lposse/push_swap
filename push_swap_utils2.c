@@ -28,34 +28,58 @@ void	*ft_lst_findcontent_byindex(t_list *a, int index)
 	return (NULL);
 }
 
+int	ft_pushswap_finalcheck(t_list **a, t_list **b)
+{
+	if (ft_pushswap_check_is_sorted(*a) == 1)
+	{
+		ft_pushswap_freestack(a, b);
+		return (0);
+	}
+	else
+	{
+		ft_pushswap_freestack(a, b);
+		return (1);
+	}
+}
+
 int	ft_pushswap_check_is_sorted(t_list *a)
 {
-	int	i;
+	int	current;
+	int	next;
 
-	i = *(int *)(a->content);
-	while (a)
+	if (!a || !a->next)
+		return (0);
+	while (a->next)
 	{
-		if (i > *(int *)(a->content))
+		current = *(int *)(a->content);
+		next = *(int *)(a->next->content);
+		if (current > next)
 			return (0);
-		i = *(int *)(a->content);
 		a = a->next;
 	}
 	return (1);
 }
 
-void	ft_pushswap_freestack(t_list **a)
+void	ft_pushswap_freestack(t_list **a, t_list **b)
 {
 	t_list	*temp;
 
-	if (!a)
-		return ;
 	while (*a)
 	{
 		temp = (*a)->next;
-		(*a)->content = NULL;
+		free((*a)->content);
 		free(*a);
 		*a = temp;
 	}
+	while (*b)
+	{
+		temp = (*b)->next;
+		free((*b)->content);
+		free(*b);
+		*b = temp;
+	}
+	*a = NULL;
+	*b = NULL;
 }
 
 int	ft_pushswap_findplace_pb(t_list *b, int num_to_pushb)

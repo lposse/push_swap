@@ -1,4 +1,4 @@
-NAME = libft_bonusprintf.a
+NAME = libft.a
 CC = cc
 CFLAGS = -c -Wall -Wextra -Werror
 SOURCE_DIR = .

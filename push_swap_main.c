@@ -12,20 +12,20 @@
 
 #include "push_swap.h"
 
-void	ft_pushswap_algorithm2(t_list *a)
+void	ft_pushswap_algorithm2(t_list **a)
 {
-	if (*(int *)(a->content) > *(int *)(a->next->content))
-		ft_pushswap_sa(&a);
+	if (*(int *)((*a)->content) > *(int *)((*a)->next->content))
+		ft_pushswap_sa(a);
 }
 
 void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 {
 	if (list_size == 2)
-		return (ft_pushswap_algorithm2(*a));
+		return (ft_pushswap_algorithm2(a));
 	if (list_size == 3)
-		return (ft_pushswap_algorithm3(*a));
+		return (ft_pushswap_algorithm3(a));
 	if (list_size == 4)
-		return (ft_pushswap_algorithm4(*a, *b));
+		return (ft_pushswap_algorithm4(a, b));
 	if (list_size >= 5)
 		return (ft_pushswap_algorithmturk(a, b));
 }
@@ -79,26 +79,42 @@ int	ft_pushswap_error(char *argv[])
 int	main(int argc, char *argv[])
 {
 	int		i;
+	int		atoi;
 	t_list	*a;
 	t_list	*b;
 	t_list	*new_node;
 
 	if (ft_pushswap_error(argv + 1) == 1)
+	{
+		ft_pushswap_freestack(&a, &b);
 		return (1);
-	b = ft_lstnew(NULL);
+	}
+	b = NULL;
 	a = NULL;
+	atoi = ft_atoi(argv[1]);
 	if (argc > 1)
-		a = ft_lstnew((void *)(long)ft_atoi(argv[1]));
+		a = ft_lstnew(ft_memcpy(malloc(sizeof(int)), &atoi, sizeof(int)));
+	if (!a)
+	{
+		ft_pushswap_freestack(&a, &b);
+		return (1);
+	}
 	i = 2;
 	while (argv[i])
 	{
-		new_node = ft_lstnew((void *)(long)ft_atoi(argv[i]));
+		atoi = ft_atoi(argv[i]);
+		new_node = ft_lstnew(ft_memcpy(malloc(sizeof(int)), &atoi, sizeof(int)));
+		if (!new_node)
+		{
+			ft_pushswap_freestack(&a, &b);
+			return (1);
+		}
 		ft_lstadd_back(&a, new_node);
 		i++;
 	}
 	i = ft_lstsize(a);
 	ft_pushswap_prealgorithm(i, &a, &b);
-	if (ft_pushswap_check_is_sorted(a) == 1)
-		return (0);
-	return (1);
+	ft_pushswap_finalcheck(&a, &b);
+	ft_pushswap_freestack(&a, &b);
+	return (0);
 }

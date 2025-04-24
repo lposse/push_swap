@@ -12,28 +12,19 @@
 
 #include "libft.h"
 
-static t_list	*ft_lstlast13(t_list *lst)
-{
-	t_list	*ptr;
-
-	if (lst == NULL)
-		return (NULL);
-	ptr = lst;
-	while (ptr->next != NULL)
-		ptr = ptr->next;
-	return (ptr);
-}
-
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*ultimo_nodo;
+	t_list	*temp;
 
-	if (*lst == NULL)
-	{
-		*lst = new;
+	if(!lst || !new)
 		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		temp = *lst;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new;
 	}
-	ultimo_nodo = ft_lstlast13(*lst);
-	ultimo_nodo->next = new;
-	new->next = NULL;
 }
