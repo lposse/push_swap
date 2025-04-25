@@ -24,9 +24,9 @@ void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 		return (ft_pushswap_algorithm2(a));
 	if (list_size == 3)
 		return (ft_pushswap_algorithm3(a));
-	if (list_size == 4)
-		return (ft_pushswap_algorithm4(a, b));
-	if (list_size >= 5)
+	/* if (list_size == 4)
+		return (ft_pushswap_algorithm4(a, b));*/
+	if (list_size >= 4)
 		return (ft_pushswap_algorithmturk(a, b));
 }
 
@@ -84,13 +84,10 @@ int	main(int argc, char *argv[])
 	t_list	*b;
 	t_list	*new_node;
 
-	if (ft_pushswap_error(argv + 1) == 1)
-	{
-		ft_pushswap_freestack(&a, &b);
-		return (1);
-	}
-	b = NULL;
 	a = NULL;
+	b = NULL;
+	if (argc <= 1 || ft_pushswap_error(argv + 1) == 1)
+		return (1);
 	atoi = ft_atoi(argv[1]);
 	if (argc > 1)
 		a = ft_lstnew(ft_memcpy(malloc(sizeof(int)), &atoi, sizeof(int)));
@@ -115,6 +112,5 @@ int	main(int argc, char *argv[])
 	i = ft_lstsize(a);
 	ft_pushswap_prealgorithm(i, &a, &b);
 	ft_pushswap_finalcheck(&a, &b);
-	ft_pushswap_freestack(&a, &b);
 	return (0);
 }

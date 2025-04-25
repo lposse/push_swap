@@ -12,12 +12,12 @@
 
 #include "push_swap.h"
 
-void    ft_pushswap_algorithm4_pb3pa(t_list *a, t_list *b)
+/* void    ft_pushswap_algorithm4_pb3pa(t_list **a, t_list **b)
 {
-	ft_pushswap_pb(&a, &b);
-	ft_pushswap_algorithm3(&a);
-	ft_pushswap_pa(&a, &b);
-}
+	ft_pushswap_pb(a, b);
+	ft_pushswap_algorithm3(a);
+	ft_pushswap_pa(a, b);
+} */
 
 int	find_cheapest_element(t_list *a, t_list *b, int *cheapest_pos)
 {
@@ -53,11 +53,13 @@ void	ft_pushswap_algorithmturk(t_list **a, t_list **b)
 	int	size_b;
 	int	best_pos;
 
+	if (!a || !*a || ft_lstsize(*a) < 2)
+		return ;
 	ft_pushswap_pb(a, b);
 	ft_pushswap_pb(a, b);
-	if (ft_lstsize(*b) == 2 && ft_lst_findcontent_byindex(*b, 0) < ft_lst_findcontent_byindex(*b, 1))
+	if (ft_lstsize(*b) == 2 && *(int *)ft_lst_findcontent_byindex(*b, 0) < *(int *)ft_lst_findcontent_byindex(*b, 1))
 		ft_pushswap_sb(b);
-	while (ft_lstsize(*a) > 3)
+	while (*a && ft_lstsize(*a) > 3)
 	{
 		max_pos_b = ft_lst_intmax(*b);
 		min_pos_b = ft_lst_intmin(*b);
@@ -65,7 +67,7 @@ void	ft_pushswap_algorithmturk(t_list **a, t_list **b)
 		execute_optimal_moves(a, b, cheapest_pos, max_pos_b, min_pos_b);
 	}
 	ft_pushswap_algorithm3(a);
-	while (ft_lstsize(*b) > 0)
+	while (*b && ft_lstsize(*b) > 0)
 	{
 		best_pos = ft_lst_intmax_index(*b);
 		size_b = ft_lstsize(*b);
@@ -83,8 +85,6 @@ void	ft_pushswap_algorithmturk(t_list **a, t_list **b)
 			{
 				ft_pushswap_rrb(b);
 				best_pos++;
-				if (best_pos == size_b)
-					best_pos = 0;
 			}
 		}
 		ft_pushswap_pa(a, b);

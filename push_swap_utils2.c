@@ -30,8 +30,27 @@ void	*ft_lst_findcontent_byindex(t_list *a, int index)
 
 int	ft_pushswap_finalcheck(t_list **a, t_list **b)
 {
-	if (ft_pushswap_check_is_sorted(*a) == 1)
+	int	min_index;
+
+	if (ft_pushswap_check_is_sorted(a) == 1)
 	{
+		if (*(int *)((*a)->content) != ft_lst_intmin(*a))
+		{
+			min_index = ft_lst_findindex_ofint(*a, ft_lst_intmin(*a));
+			while (min_index > 0 )
+			{
+				if (min_index <= ft_lstsize(*a))
+				{
+					ft_pushswap_ra(a);
+					min_index--;
+				}
+				else
+				{
+					ft_pushswap_rra(a);
+					min_index = (min_index + 1) % ft_lstsize(*a);
+				}
+			}
+		}
 		ft_pushswap_freestack(a, b);
 		return (0);
 	}
@@ -42,20 +61,22 @@ int	ft_pushswap_finalcheck(t_list **a, t_list **b)
 	}
 }
 
-int	ft_pushswap_check_is_sorted(t_list *a)
+int	ft_pushswap_check_is_sorted(t_list **a)
 {
-	int	current;
-	int	next;
+	int		current;
+	int		next;
+	t_list	*temp;
 
-	if (!a || !a->next)
+	temp = *a;
+	if (!temp || !(temp->next))
 		return (0);
-	while (a->next)
+	while (temp->next)
 	{
-		current = *(int *)(a->content);
-		next = *(int *)(a->next->content);
+		current = *(int *)(temp->content);
+		next = *(int *)(temp->next->content);
 		if (current > next)
 			return (0);
-		a = a->next;
+		temp = temp->next;
 	}
 	return (1);
 }
@@ -64,19 +85,25 @@ void	ft_pushswap_freestack(t_list **a, t_list **b)
 {
 	t_list	*temp;
 
-	while (*a)
+	if (a)
 	{
-		temp = (*a)->next;
-		free((*a)->content);
-		free(*a);
-		*a = temp;
+		while (*a)
+		{
+			temp = (*a)->next;
+			free((*a)->content);
+			free(*a);
+			*a = temp;
+		}
 	}
-	while (*b)
+	if (b)
 	{
-		temp = (*b)->next;
-		free((*b)->content);
-		free(*b);
-		*b = temp;
+		while (*b)
+		{
+			temp = (*b)->next;
+			free((*b)->content);
+			free(*b);
+			*b = temp;
+		}
 	}
 	*a = NULL;
 	*b = NULL;
@@ -86,22 +113,25 @@ int	ft_pushswap_findplace_pb(t_list *b, int num_to_pushb)
 {
 	t_list	*temp;
 	int		i;
+	int		current;
+	int		next;
 
-	if (num_to_pushb > *(int *)(b->content) && num_to_pushb < *(int *)(ft_lstlast(b)->content))
-		return (0);
+	temp = b;
+	i = 0;
+	if (!b || !b->next)
+		return (-1);
 	if (num_to_pushb > ft_lst_intmax(b) || num_to_pushb < ft_lst_intmin(b))
-		i = ft_lst_findindex_ofint(b, ft_lst_intmax(b));
-	else
+		return (ft_lst_findindex_ofint(b, ft_lst_intmax(b)));
+	while (temp && temp->next)
 	{
-		temp = b;
-		i = 1;
-		while (*(int *)(temp->content) < num_to_pushb || *(int *)(temp->next->content) > num_to_pushb)
-		{
-			temp = temp->next;
-			i++;
-		}
+		current = *(int *)(temp->content);
+		next = *(int *)(temp->next->content);
+		if (num_to_pushb < current && num_to_pushb > next)
+			return (i + 1);
+		temp = temp->next;
+		i++;
 	}
-	return (i);
+	return (-1);
 }
 
 int	ft_pushswap_findplace_pa(t_list *a, int num_to_push)

@@ -40,29 +40,30 @@ int	find_target_position_in_b(t_list *b, int node_content, int max_index, int mi
 {
 	t_list	*temp;
 	int		target_pos;
+	void	*max_content;
+	void	*min_content;
 
 	if (!b)
 		return (0);
-	if (node_content > *(int *)ft_lst_findcontent_byindex(b, max_index))
-		return (max_index);
-	if (node_content < *(int *)ft_lst_findcontent_byindex(b, min_index))
-		return (max_index);
+	max_content = ft_lst_findcontent_byindex(b, max_index);
+	min_content = ft_lst_findcontent_byindex(b, min_index);
+	if (!max_content || !min_content)
+		return (0);
+	if (node_content > *(int *)max_content || node_content < *(int *)min_content)
+		return ((max_index + 1) % ft_lstsize(b));
 	temp = b;
 	target_pos = 0;
-	while (temp)
+	while (temp && temp->next)
 	{
-		if (temp->next && node_content < *(int *)(temp->content) && node_content > *(int *)(temp->next->content))
-		{
-			target_pos++;
+		if (node_content < *(int *)(temp->content) && node_content > *(int *)(temp->next->content))
 			break;
-		}
-		temp = temp->next;
 		target_pos++;
+		temp = temp->next;
 	}
-	return (target_pos);
+	return ((target_pos + 1) % ft_lstsize(b));
 }
 
-int	ft_pushswap_calculate_totalmoves(t_list *a, t_list *b, int index_a, int max_pos_b, int min_pos_b)
+int	ft_pushswap_calculate_totalmoves(t_list **a, t_list **b, int index_a, int max_pos_b, int min_pos_b)
 {
 	int	moves_totop_a;
 	int	moves_b;
@@ -70,10 +71,10 @@ int	ft_pushswap_calculate_totalmoves(t_list *a, t_list *b, int index_a, int max_
 	int	target_pos_b;
 	int	counter_rr_rrr;
 
-	node_content = *(int *)ft_lst_findcontent_byindex(a, index_a);
-	moves_totop_a = calc_moves_to_top_a(a, index_a);
-	target_pos_b = find_target_position_in_b(b, node_content, max_pos_b, min_pos_b);
-	moves_b = calc_moves_to_position_b(b, target_pos_b);
+	node_content = *(int *)ft_lst_findcontent_byindex(*a, index_a);
+	moves_totop_a = calc_moves_to_top_a(*a, index_a);
+	target_pos_b = find_target_position_in_b(*b, node_content, max_pos_b, min_pos_b);
+	moves_b = calc_moves_to_position_b(*b, target_pos_b);
 	counter_rr_rrr = 0;
 	while (moves_totop_a > 0 && moves_b > 0)
 	{
