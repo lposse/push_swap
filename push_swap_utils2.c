@@ -19,6 +19,7 @@ void	*ft_lst_findcontent_byindex(t_list *a, int index)
 	if (!a)
 		return (NULL);
 	temp = a;
+	ft_lstsize(a);
 	while (temp)
 	{
 		if (temp->index == index)
@@ -26,39 +27,6 @@ void	*ft_lst_findcontent_byindex(t_list *a, int index)
 		temp = temp->next;
 	}
 	return (NULL);
-}
-
-int	ft_pushswap_finalcheck(t_list **a, t_list **b)
-{
-	int	min_index;
-
-	if (ft_pushswap_check_is_sorted(a) == 1)
-	{
-		if (*(int *)((*a)->content) != ft_lst_intmin(*a))
-		{
-			min_index = ft_lst_findindex_ofint(*a, ft_lst_intmin(*a));
-			while (min_index > 0 )
-			{
-				if (min_index <= ft_lstsize(*a))
-				{
-					ft_pushswap_ra(a);
-					min_index--;
-				}
-				else
-				{
-					ft_pushswap_rra(a);
-					min_index = (min_index + 1) % ft_lstsize(*a);
-				}
-			}
-		}
-		ft_pushswap_freestack(a, b);
-		return (0);
-	}
-	else
-	{
-		ft_pushswap_freestack(a, b);
-		return (1);
-	}
 }
 
 int	ft_pushswap_check_is_sorted(t_list **a)

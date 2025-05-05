@@ -12,6 +12,76 @@
 
 #include "push_swap.h"
 
+int	calc_moves_to_top_a(t_list *a, int element_index)
+{
+	int	stack_size;
+
+	stack_size = ft_lstsize(a);
+	if (element_index <= stack_size / 2)
+		return (element_index);
+	else
+		return (element_index - stack_size);
+}
+
+int	calc_moves_to_position_b(t_list *b, int target_pos)
+{
+	int	size_b;
+
+	if (!b)
+		return (0);
+	size_b = ft_lstsize(b);
+	if (target_pos <= size_b / 2)
+		return (target_pos);
+	else
+		return (target_pos - size_b);
+}
+
+void	ft_pushswap_doublerotations(t_list **a, t_list **b, int *index_a, int *index_b, int *counter_rr_rrr)
+{
+	while (*counter_rr_rrr > 0)
+	{
+		ft_pushswap_rr(a, b);
+		(*counter_rr_rrr)--;
+		(*index_a)--;
+		(*index_b)--;
+	}
+	while (*counter_rr_rrr < 0)
+	{
+		ft_pushswap_rrr(a, b);
+		(*counter_rr_rrr)++;
+		(*index_a)++;
+		(*index_b)++;
+	}
+}
+
+int	ft_pushswap_finalcheck(t_list **a, t_list **b)
+{
+	int	min_index;
+
+	if (ft_pushswap_check_is_sorted(a) == 0)
+	{
+		min_index = ft_lst_findindex_ofint(*a, ft_lst_intmin(*a));
+		if (min_index <= ft_lstsize(*a) / 2)
+		{
+			while (min_index-- > 0)
+				ft_pushswap_ra(a);
+		}
+		else
+		{
+			min_index = ft_lstsize(*a) - min_index;
+			while (min_index-- > 0)
+				ft_pushswap_rra(a);
+		}
+		ft_pushswap_freestack(a, b);
+		return (0);
+	}
+	else
+	{
+		ft_pushswap_freestack(a, b);
+		return (0);
+	}
+}
+
 void	ft_pushswap_algorithm3(t_list **a)
 {
 	int	c2;
@@ -21,7 +91,7 @@ void	ft_pushswap_algorithm3(t_list **a)
 	c3 = *(int *)((*a)->next->next->content);
 	if ((*(int *)((*a)->content) < c2) && (*(int *)((*a)->content) < c3) && (c2 < c3))
 		return ;
-	if (*(int *)((*a)->content) > c2 && c2 < c3)
+	if (*(int *)((*a)->content) > c2 && c2 < c3)  
 	{
 		if (*(int *)((*a)->content) < c3)
 			return (ft_pushswap_sa(a));
@@ -40,113 +110,3 @@ void	ft_pushswap_algorithm3(t_list **a)
 			return (ft_pushswap_sa(a));
 	}
 }
-
-/* void	ft_pushswap_algorithm4_x1(t_list **a, t_list **b, int c1, int c3, int c4)
-{
-	if (c1 < c3 && c1 < c4)
-	{
-		if (c3 > c4)
-		{
-			ft_pushswap_pb(a, b);
-			ft_pushswap_pb(a, b);
-			ft_pushswap_ss(a, b);
-			ft_pushswap_pa(a, b);
-			return (ft_pushswap_pa(a, b));
-		}
-		return (ft_pushswap_sa(a));
-	}
-	if (c3 < c4)
-	{
-		ft_pushswap_rra(a);
-		ft_pushswap_sa(a);
-		ft_pushswap_ra(a);
-		return (ft_pushswap_ra(a));
-	}
-	if (c3 > c4)
-	{
-		ft_pushswap_sa(a);
-		ft_pushswap_rra(a);
-		return (ft_pushswap_sa(a));
-	}
-}
-
-void	ft_pushswap_algorithm4_4o3o2xxx(t_list **a, t_list **b, int c2, int c3, int c4)
-{
-	int	c1;
-
-	c1 = *(int *)((*a)->content);
-	if (c1 > c2 && c1 > c3 && c1 > c4)
-	{
-		ft_pushswap_pb(a, b);
-		ft_pushswap_algorithm3(a);
-		ft_pushswap_pa(a, b);
-		return (ft_pushswap_ra(a));
-	}
-	if (c2 < c3 && c2 < c4)
-		return (ft_pushswap_algorithm4_x1(a, b, c1, c3, c4));
-	else
-	{
-		ft_pushswap_sa(a);
-		ft_pushswap_rra(a);
-		if (c4 > c3)
-		{
-			ft_pushswap_pb(a, b);
-			ft_pushswap_rra(a);
-			ft_pushswap_pa(a, b);
-			return ft_pushswap_ra(a);
-		}
-		return ;
-	}
-}
-
-void	ft_pushswap_algorithm4_x3o4xx(t_list **a, t_list **b, int c2, int c3, int c4)
-{
-	int	c1;
-
-	c1 = *(int *)((*a)->content);
-	if (c2 < c4)
-	{
-		ft_pushswap_ra(a);
-		ft_pushswap_ra(a);
-		ft_pushswap_pb(a, b);
-		ft_pushswap_ra(a);
-		return (ft_pushswap_pa(a, b));
-	}
-	if (c1 > c3 && c1 > c4)
-	{
-		ft_pushswap_rra(a);
-		ft_pushswap_rra(a);
-		if (c3 > c4)
-			return ft_pushswap_sa(a);
-		return ;
-	}
-	else
-		return (ft_pushswap_algorithm4_pb3pa(a, b));	
-}
-
-void	ft_pushswap_algorithm4(t_list **a, t_list **b)
-{
-	t_list	*temp;
-	t_list	*fourth;
-	int		c1;
-	int		c2;
-	int		c3;
-
-	c1 = *(int *)((*a)->content);
-	c2 = *(int *)((*a)->next->content);
-	c3 = *(int *)((*a)->next->next->content);
-	fourth = *a;
-	while (fourth->next != NULL)
-		fourth = fourth->next;
-	temp = *a;
-	while (c1 < *(int *)(temp->content) && temp->next != NULL)
-		temp = temp->next;
-	if (temp == fourth)
-		return (ft_pushswap_algorithm4_pb3pa(a, b));
-	if (temp == *a)
-		return (ft_pushswap_algorithm4_4o3o2xxx(a, b, c2, c3, *(int *)(fourth->content)));
-	if (temp == (*a)->next->next)
-		return (ft_pushswap_rra(a));
-	if (temp == (*a)->next)
-		return (ft_pushswap_algorithm4_x3o4xx(a, b, c2, c3, *(int *)(fourth->content)));	
-} */
