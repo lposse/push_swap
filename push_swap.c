@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 21:10:08 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/26 21:36:32 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/06 21:15:56 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,52 +61,48 @@ int	ft_pushswap_finalcheck(t_list **a, t_list **b)
 	if (ft_pushswap_check_is_sorted(a) == 0)
 	{
 		min_index = ft_lst_findindex_ofint(*a, ft_lst_intmin(*a));
-		if (min_index <= ft_lstsize(*a) / 2)
+		if(min_index != 0)
 		{
-			while (min_index-- > 0)
-				ft_pushswap_ra(a);
+			if (min_index <= ft_lstsize(*a) / 2)
+				while (min_index-- > 0)
+					ft_pushswap_ra(a);
+			else
+			{
+				min_index = ft_lstsize(*a) - min_index;
+				while (min_index-- > 0)
+					ft_pushswap_rra(a);
+			}
 		}
-		else
-		{
-			min_index = ft_lstsize(*a) - min_index;
-			while (min_index-- > 0)
-				ft_pushswap_rra(a);
-		}
-		ft_pushswap_freestack(a, b);
-		return (0);
 	}
-	else
-	{
-		ft_pushswap_freestack(a, b);
-		return (0);
-	}
+	ft_pushswap_freestack(a, b);
+	return (0);
 }
 
 void	ft_pushswap_algorithm3(t_list **a)
 {
-	int	c2;
-	int	c3;
+	int	second;
+	int	third;
 
-	c2 = *(int *)((*a)->next->content);
-	c3 = *(int *)((*a)->next->next->content);
-	if ((*(int *)((*a)->content) < c2) && (*(int *)((*a)->content) < c3) && (c2 < c3))
+	if (!a || !*a || !(*a)->next || !(*a)->next->next)
+		return;
+	second = *(int *)((*a)->next->content);
+	third = *(int *)((*a)->next->next->content);
+	if (*(int *)((*a)->content) < second && (*(int *)((*a)->content) < third) && (second < third))
 		return ;
-	if (*(int *)((*a)->content) > c2 && c2 < c3)  
+	if (*(int *)((*a)->content) > second && second < third && *(int *)((*a)->content) < third)
+		ft_pushswap_sa(a);
+	else if (*(int *)((*a)->content) > second && second > third)
 	{
-		if (*(int *)((*a)->content) < c3)
-			return (ft_pushswap_sa(a));
-		if (*(int *)((*a)->content) > c3)
-			return (ft_pushswap_ra(a));
-	}
-	if ((*(int *)((*a)->content) > c2) && (*(int *)((*a)->content) > c3) && (c2 > c3))
-	{
-		ft_pushswap_ra(a);
-		return (ft_pushswap_sa(a));
-	}
-	if (*(int *)((*a)->content) < c2 && c2 > c3)
-	{
+		ft_pushswap_sa(a);
 		ft_pushswap_rra(a);
-		if (*(int *)((*a)->content) > *(int *)((*a)->next->content))
-			return (ft_pushswap_sa(a));
 	}
+	else if (*(int *)((*a)->content) > second && second < third && *(int *)((*a)->content) > third)
+		ft_pushswap_ra(a);
+	else if (*(int *)((*a)->content) < second && second > third && *(int *)((*a)->content) < third)
+	{
+		ft_pushswap_sa(a);
+		ft_pushswap_ra(a);
+	}
+	else if (*(int *)((*a)->content) < second && second > third && *(int *)((*a)->content) > third)
+		ft_pushswap_rra(a);
 }

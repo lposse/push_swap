@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 21:54:13 by lposse            #+#    #+#             */
-/*   Updated: 2025/04/01 21:52:32 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/06 21:04:26 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void	ft_rotate_stack_to_top(t_list **stack, int index, char stack_name);
 void	execute_optimal_moves(t_list **a, t_list **b, int index_node_a, int counter_rr_rrr);
 int		find_target_position_in_a(t_list *a, int value);
 int		ft_pushswap_finalcheck(t_list **a, t_list **b);
+int		ft_abs(int a);
+int		find_max_closest_to_top(t_list *b);
 
 #endif

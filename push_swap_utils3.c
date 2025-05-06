@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   push_swap_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 18:27:08 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/06 21:22:15 by lposse           ###   ########.fr       */
+/*   Created: 2025/05/06 20:03:43 by lposse            #+#    #+#             */
+/*   Updated: 2025/05/06 21:04:08 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_abs(int a)
 {
-	t_list	*temp;
+	if (a < 0)
+		a = -a;
+	return (a);
+}
 
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-		*lst = new;
-	else
+int	find_max_closest_to_top(t_list *b)
+{
+	int		max_val;
+	int		i;
+	t_list	*tmp;
+
+	max_val = ft_lst_intmax(b);
+	i = 0;
+	tmp = b;
+	while (tmp)
 	{
-		temp = *lst;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new;
+		if (*(int *)tmp->content == max_val)
+			return (i);
+		i++;
+		tmp = tmp->next;
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:01:31 by lposse            #+#    #+#             */
-/*   Updated: 2025/04/01 21:56:08 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/06 19:24:58 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 {
 	int	index_push_a;
 
+	if (ft_pushswap_check_is_sorted(a) == 1)
+		return ;
 	if (list_size == 2)
 	{
 		if (*(int *)((*a)->content) > *(int *)((*a)->next->content))
@@ -44,8 +46,6 @@ void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 		return (ft_pushswap_algorithm3(a));
 	if (list_size == 4)
 	{
-		if (ft_pushswap_check_is_sorted(a) == 1)
-			return;
 		ft_pushswap_pb(a, b);
 		ft_pushswap_algorithm3(a);
 		index_push_a = find_target_position_in_a(*a, *(int *)(*b)->content);

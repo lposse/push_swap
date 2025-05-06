@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:39:49 by lposse            #+#    #+#             */
-/*   Updated: 2025/03/24 20:08:39 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/06 21:23:41 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_pushswap_pa(t_list **a, t_list **b)
 	t_list	*temp;
 
 	if (!b || !*b)
-		return;
+		return ;
 	temp = *b;
 	*b = (*b)->next;
 	temp->next = NULL;
@@ -74,10 +74,10 @@ void	ft_pushswap_pa(t_list **a, t_list **b)
 
 void	ft_pushswap_pb(t_list **a, t_list **b)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	if (!a || !*a)
-		return;
+		return ;
 	temp = *a;
 	*a = (*a)->next;
 	temp->next = NULL;

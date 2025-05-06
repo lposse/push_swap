@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 20:29:23 by lposse            #+#    #+#             */
-/*   Updated: 2025/04/01 21:20:22 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/06 21:19:49 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ int	find_target_position_in_b(t_list *b, int node_content)
   
 void	ft_rotate_stack_to_top(t_list **stack, int index, char stack_name)
 {
-	int	size;
-
-	size = ft_lstsize(*stack);
-	if (index <= size / 2)
+	if (index < 0)
+		index = ft_lstsize(*stack) - index;
+	if (index <= ft_lstsize(*stack) / 2)
 	{
 		while (index-- > 0)
 		{
@@ -52,7 +51,7 @@ void	ft_rotate_stack_to_top(t_list **stack, int index, char stack_name)
 	}
 	else
 	{
-		index = size - index;
+		index = ft_lstsize(*stack) - index;
 		while (index-- > 0)
 		{
 			if (stack_name == 'a')
@@ -92,13 +91,7 @@ int	ft_pushswap_calculate_totalmoves(t_list **a, t_list **b, int index_a, int *c
 	moves_b = calc_moves_to_position_b(*b, target_pos_b);
 	*counter_rr_rrr = 0;
 	ft_pushswap_calculate_totalmoves2(&moves_totop_a, &moves_b, counter_rr_rrr);
-	if (moves_totop_a < 0)
-		moves_totop_a = -(moves_totop_a);
-	if (moves_b < 0)
-		moves_b = -(moves_b);
-	if (*counter_rr_rrr < 0)
-		return (moves_totop_a + moves_b - (*counter_rr_rrr) + 1);
-	return (moves_totop_a + moves_b + (*counter_rr_rrr) + 1);
+	return (ft_abs(moves_totop_a) + ft_abs(moves_b) + ft_abs(*counter_rr_rrr) + 1);
 }
 
 void	execute_optimal_moves(t_list **a, t_list **b, int index_node_a, int counter_rr_rrr)
@@ -109,7 +102,9 @@ void	execute_optimal_moves(t_list **a, t_list **b, int index_node_a, int counter
 	node_content = *(int *)ft_lst_findcontent_byindex(*a, index_node_a);
 	target_pos_b = find_target_position_in_b(*b, node_content);
 	ft_pushswap_doublerotations(a, b, &index_node_a, &target_pos_b, &counter_rr_rrr);
-	ft_rotate_stack_to_top(a, index_node_a, 'a');
-	ft_rotate_stack_to_top(b, target_pos_b, 'b');
+	if (index_node_a != 0)
+		ft_rotate_stack_to_top(a, index_node_a, 'a');
+	if (target_pos_b != 0)
+		ft_rotate_stack_to_top(b, target_pos_b, 'b');
 	ft_pushswap_pb(a, b);
 }
