@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:01:31 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/06 19:24:58 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 14:17:08 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_is_positive_int(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!str || str[i] == '\0')
 		return (0);
@@ -28,7 +28,7 @@ int	ft_is_positive_int(char *str)
 		i++;
 	}
 	return (1);
-}    
+}
 
 void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b)
 {
@@ -88,20 +88,20 @@ int	main_two(t_list **a, t_list **b, char *argv[])
 {
 	int		atoi_;
 	int		i;
-	t_list	*new_node;
+	t_list	*new;
 
 	i = 2;
-	while(argv[i])
+	while (argv[i])
 	{
 		atoi_ = ft_atoi(argv[i]);
-		new_node = ft_lstnew(ft_memcpy(malloc(sizeof(int)), &atoi_, sizeof(int)));
-		if (!new_node)
+		new = ft_lstnew(ft_memcpy(malloc(sizeof(int)), &atoi_, sizeof(int)));
+		if (!new)
 		{
-			free(new_node);
+			free(new);
 			ft_pushswap_freestack(a, b);
 			return (1);
 		}
-		ft_lstadd_back(a, new_node);
+		ft_lstadd_back(a, new);
 		i++;
 	}
 	return (0);

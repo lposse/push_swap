@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 21:54:13 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/06 21:04:26 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 16:35:53 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_pushswap_prealgorithm(int list_size, t_list **a, t_list **b);
 void	ft_pushswap_algorithm3(t_list **a);
 int		ft_is_positive_int(char *str);
 int		ft_pushswap_error(char *argv[]);
-int		find_cheapest_element(t_list **a, t_list **b, int *cheapest_pos, int *counter_rr_rrr);
+int		find_cheapest_element(t_list **a, t_list **b, int *cheap, int *rr_rrr);
 void	ft_pushswap_algorithmturk(t_list **a, t_list **b);
-void    ft_pushswap_algorithmturk2(t_list **a, t_list **b); 
+void	ft_pushswap_algorithmturk2(t_list **a, t_list **b);
 int		ft_lst_intmax_index(t_list *a);
 int		ft_lst_intmax(t_list *a);
 int		ft_lst_intmin_index(t_list *a);
@@ -48,11 +48,11 @@ int		ft_pushswap_findplace_pb(t_list *b, int num_to_push);
 int		calc_moves_to_top_a(t_list *a, int element_index);
 int		calc_moves_to_position_b(t_list *b, int target_pos);
 int		find_target_position_in_b(t_list *b, int node_content);
-int		ft_pushswap_calculate_totalmoves(t_list **a, t_list **b, int index_a, int *counter_rr_rrr);
-void	ft_pushswap_calculate_totalmoves2(int *moves_totop_a, int *moves_b, int *counter_rr_rrr); 
-void	ft_pushswap_doublerotations(t_list **a, t_list **b, int *index_a, int *index_b, int *counter_rr_rrr);
+int		ft_calc_totalmoves(t_list **a, t_list **b, int index_a, int *rr_rrr);
+void	ft_calc_totalmoves2(int *movestop_a, int *moves_b, int *rr_rrr);
+void	ft_doublerotations(t_list **a, t_list **b, int *idx_a, int *rr_rrr);
 void	ft_rotate_stack_to_top(t_list **stack, int index, char stack_name);
-void	execute_optimal_moves(t_list **a, t_list **b, int index_node_a, int counter_rr_rrr);
+void	execute_optimal_moves(t_list **a, t_list **b, int index_a, int rr_rrr);
 int		find_target_position_in_a(t_list *a, int value);
 int		ft_pushswap_finalcheck(t_list **a, t_list **b);
 int		ft_abs(int a);

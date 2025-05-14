@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 21:10:08 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/06 21:15:56 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 16:35:00 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,19 @@ int	calc_moves_to_position_b(t_list *b, int target_pos)
 		return (target_pos - size_b);
 }
 
-void	ft_pushswap_doublerotations(t_list **a, t_list **b, int *index_a, int *index_b, int *counter_rr_rrr)
+void	ft_doublerotations(t_list **a, t_list **b, int *idx_a, int *rr_rrr)
 {
-	while (*counter_rr_rrr > 0)
+	while (*rr_rrr > 0)
 	{
 		ft_pushswap_rr(a, b);
-		(*counter_rr_rrr)--;
-		(*index_a)--;
-		(*index_b)--;
+		(*rr_rrr)--;
+		(*idx_a)--;
 	}
-	while (*counter_rr_rrr < 0)
+	while (*rr_rrr < 0)
 	{
 		ft_pushswap_rrr(a, b);
-		(*counter_rr_rrr)++;
-		(*index_a)++;
-		(*index_b)++;
+		(*rr_rrr)++;
+		(*idx_a)++;
 	}
 }
 
@@ -61,7 +59,7 @@ int	ft_pushswap_finalcheck(t_list **a, t_list **b)
 	if (ft_pushswap_check_is_sorted(a) == 0)
 	{
 		min_index = ft_lst_findindex_ofint(*a, ft_lst_intmin(*a));
-		if(min_index != 0)
+		if (min_index != 0)
 		{
 			if (min_index <= ft_lstsize(*a) / 2)
 				while (min_index-- > 0)
@@ -80,29 +78,29 @@ int	ft_pushswap_finalcheck(t_list **a, t_list **b)
 
 void	ft_pushswap_algorithm3(t_list **a)
 {
-	int	second;
-	int	third;
+	int	s;
+	int	t;
 
 	if (!a || !*a || !(*a)->next || !(*a)->next->next)
-		return;
-	second = *(int *)((*a)->next->content);
-	third = *(int *)((*a)->next->next->content);
-	if (*(int *)((*a)->content) < second && (*(int *)((*a)->content) < third) && (second < third))
 		return ;
-	if (*(int *)((*a)->content) > second && second < third && *(int *)((*a)->content) < third)
+	s = *(int *)((*a)->next->content);
+	t = *(int *)((*a)->next->next->content);
+	if (*(int *)((*a)->content) < s && (*(int *)((*a)->content) < t) && (s < t))
+		return ;
+	if (*(int *)((*a)->content) > s && s < t && *(int *)((*a)->content) < t)
 		ft_pushswap_sa(a);
-	else if (*(int *)((*a)->content) > second && second > third)
+	else if (*(int *)((*a)->content) > s && s > t)
 	{
 		ft_pushswap_sa(a);
 		ft_pushswap_rra(a);
 	}
-	else if (*(int *)((*a)->content) > second && second < third && *(int *)((*a)->content) > third)
+	else if (*(int *)(*a)->content > s && s < t && *(int *)(*a)->content > t)
 		ft_pushswap_ra(a);
-	else if (*(int *)((*a)->content) < second && second > third && *(int *)((*a)->content) < third)
+	else if (*(int *)(*a)->content < s && s > t && *(int *)(*a)->content < t)
 	{
 		ft_pushswap_sa(a);
 		ft_pushswap_ra(a);
 	}
-	else if (*(int *)((*a)->content) < second && second > third && *(int *)((*a)->content) > third)
+	else if (*(int *)(*a)->content < s && s > t && *(int *)(*a)->content > t)
 		ft_pushswap_rra(a);
 }

@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 21:30:19 by lposse            #+#    #+#             */
-/*   Updated: 2025/04/01 21:56:55 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 14:14:38 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,20 @@ int	ft_pushswap_findplace_pa(t_list *a, int num_to_push)
 {
 	t_list	*temp;
 	int		i;
+	int		last_a;
+	int		temp2;
 
-	if (num_to_push < *(int *)(a->content) && num_to_push > *(int *)(ft_lstlast(a)->content))
+	last_a = *(int *)(ft_lstlast(a)->content);
+	if (num_to_push < *(int *)(a->content) && num_to_push > last_a)
 		return (0);
 	if (num_to_push > ft_lst_intmax(a) || num_to_push < ft_lst_intmin(a))
 		i = ft_lst_findindex_ofint(a, ft_lst_intmin(a));
 	else
 	{
 		temp = a;
+		temp2 = *(int *)(temp->next->content);
 		i = 1;
-		while (*(int *)(temp->content) > num_to_push || *(int *)(temp->next->content) < num_to_push)
+		while (*(int *)(temp->content) > num_to_push || temp2 < num_to_push)
 		{
 			temp = temp->next;
 			i++;
