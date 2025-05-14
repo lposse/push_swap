@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 21:10:08 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/14 16:35:00 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 17:04:46 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,20 @@ void	ft_doublerotations(t_list **a, t_list **b, int *idx_a, int *rr_rrr)
 int	ft_pushswap_finalcheck(t_list **a, t_list **b)
 {
 	int	min_index;
+	int	size_a;
 
+	size_a = ft_lstsize(*a);
 	if (ft_pushswap_check_is_sorted(a) == 0)
 	{
 		min_index = ft_lst_findindex_ofint(*a, ft_lst_intmin(*a));
 		if (min_index != 0)
 		{
-			if (min_index <= ft_lstsize(*a) / 2)
+			if (min_index <= size_a / 2)
 				while (min_index-- > 0)
 					ft_pushswap_ra(a);
 			else
 			{
-				min_index = ft_lstsize(*a) - min_index;
+				min_index = size_a - min_index;
 				while (min_index-- > 0)
 					ft_pushswap_rra(a);
 			}

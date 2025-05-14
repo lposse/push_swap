@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 21:54:13 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/14 16:35:53 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 17:27:52 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ void	execute_optimal_moves(t_list **a, t_list **b, int index_a, int rr_rrr);
 int		find_target_position_in_a(t_list *a, int value);
 int		ft_pushswap_finalcheck(t_list **a, t_list **b);
 int		ft_abs(int a);
-int		find_max_closest_to_top(t_list *b);
 
 #endif

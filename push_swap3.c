@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 20:29:23 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/14 16:35:40 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 17:42:27 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int	find_target_position_in_b(t_list *b, int node_content)
 	if (!b)
 		return (0);
 	max_index = ft_lst_intmax_index(b);
-	if (node_content > ft_lst_intmax(b) || node_content < ft_lst_intmin(b))
+	if (node_content > ft_lst_intmax(b))
 		return ((max_index + 1) % ft_lstsize(b));
+	else if (node_content < ft_lst_intmin(b))
+		return (ft_lst_intmin_index(b));
 	temp = b;
 	target_pos = 0;
 	while (temp && temp->next)
@@ -40,7 +42,7 @@ int	find_target_position_in_b(t_list *b, int node_content)
 void	ft_rotate_stack_to_top(t_list **stack, int index, char stack_name)
 {
 	if (index < 0)
-		index = ft_lstsize(*stack) - index;
+		index = (index + ft_lstsize(*stack)) % ft_lstsize(*stack);
 	if (index <= ft_lstsize(*stack) / 2)
 	{
 		while (index-- > 0)
