@@ -6,7 +6,7 @@
 /*   By: lposse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 19:46:36 by lposse            #+#    #+#             */
-/*   Updated: 2025/05/14 18:19:28 by lposse           ###   ########.fr       */
+/*   Updated: 2025/05/14 18:29:36 by lposse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	find_target_position_in_a(t_list *a, int value)
 	t_list	*temp;
 	int		index;
 	int		temp2;
-	
+
 	temp = a;
 	index = 0;
 	if (value > ft_lst_intmax(a) || value < ft_lst_intmin(a))
